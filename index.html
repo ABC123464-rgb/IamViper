@@ -1,1 +1,409 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b09">
+<title>IamViper | Official Website</title>
+
+<style>
+:root {
+  --bg: #080b09;
+  --panel: #101612;
+  --green: #a6ff3b;
+  --text: #f3f7f2;
+  --muted: #9ba89c;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at top, #172416, var(--bg) 55%);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+a { color: inherit; text-decoration: none; }
+header, main, footer {
+  width: min(1120px, calc(100% - 32px));
+  margin: auto;
+}
+header {
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.brand { font-weight: 950; letter-spacing: 3px; }
+.brand span { color: var(--green); }
+.status { color: var(--muted); font-size: 12px; }
+.hero {
+  padding: clamp(38px, 8vw, 80px);
+  border: 1px solid #31472b;
+  border-radius: 24px;
+  background: linear-gradient(120deg, #172319, #0b100c);
+  position: relative;
+  overflow: hidden;
+}
+.hero:after {
+  content: "V";
+  position: absolute;
+  right: 5%;
+  top: 0;
+  color: #a6ff3b0c;
+  font-size: clamp(180px, 35vw, 350px);
+  font-weight: 1000;
+  pointer-events: none;
+}
+.eyebrow {
+  color: var(--green);
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: clamp(54px, 11vw, 110px);
+  line-height: 1;
+  letter-spacing: -6px;
+  margin: 18px 0;
+  position: relative;
+  z-index: 1;
+}
+h1 span { color: var(--green); }
+.hero p:not(.eyebrow) {
+  color: var(--muted);
+  max-width: 480px;
+  line-height: 1.7;
+}
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+.btn {
+  border: 1px solid #344331;
+  border-radius: 10px;
+  padding: 13px 18px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn.primary { background: var(--green); color: #10150c; border-color: var(--green); }
+.btn:hover { border-color: var(--green); }
+.heading { margin: 42px 0 18px; }
+.heading small { color: var(--green); letter-spacing: 2px; font-weight: 900; }
+.heading h2 { margin: 8px 0; font-size: 28px; }
+.heading p { color: var(--muted); margin: 0; }
+.menu {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.menu button {
+  text-align: left;
+  min-height: 155px;
+  padding: 22px;
+  background: linear-gradient(145deg, #141c15, #0c100d);
+  color: var(--text);
+  border: 1px solid #283529;
+  border-radius: 16px;
+  cursor: pointer;
+  font: inherit;
+}
+.menu button:hover { border-color: var(--green); transform: translateY(-3px); }
+.menu .symbol { color: var(--green); font-size: 28px; display: block; margin-bottom: 15px; }
+.menu strong { font-size: 19px; display: block; }
+.menu small { display: block; color: var(--muted); margin-top: 6px; }
+.gallery { display: none; padding-top: 28px; }
+.gallery.active { display: block; }
+.gallery-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+.gallery-top h2 { margin: 0 0 6px; font-size: 30px; }
+.gallery-top p { margin: 0; color: var(--muted); }
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.video {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid #273329;
+  border-radius: 14px;
+  transition: transform .2s, border-color .2s;
+}
+.video:hover { transform: translateY(-4px); border-color: var(--green); }
+.thumb {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  background: #172319;
+  overflow: hidden;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.play {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: #10150c;
+  border-radius: 50%;
+}
+.video-info { padding: 15px; }
+.video-info strong { display: block; line-height: 1.4; }
+.video-info small { display: block; margin-top: 8px; color: var(--muted); font-size: 11px; }
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+.post {
+  min-height: 150px;
+  padding: 22px;
+  border: 1px solid #283529;
+  border-radius: 14px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.post:hover { border-color: var(--green); }
+.post-icon { color: var(--green); font-size: 25px; }
+.post small { color: var(--muted); margin-top: 12px; }
+footer {
+  margin-top: 55px;
+  padding: 25px 0 32px;
+  border-top: 1px solid #273329;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+}
+footer strong { color: var(--green); }
+
+@media (max-width: 700px) {
+  header, main, footer { width: calc(100% - 26px); }
+  .status { font-size: 10px; }
+  .hero { padding: 34px 22px; }
+  h1 { letter-spacing: -3px; }
+  .menu { grid-template-columns: 1fr; gap: 10px; }
+  .menu button { min-height: 120px; }
+  .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+  .post-grid { grid-template-columns: 1fr; }
+  .gallery-top { align-items: flex-start; flex-direction: column; }
+  .video-info { padding: 11px; }
+  .video-info strong { font-size: 13px; }
+}
+@media (max-width: 380px) {
+  .video-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="brand">☣ IAM<span>VIPER</span></div>
+  <div class="status">● OFFICIAL CREATOR SITE</div>
+</header>
+
+<main>
+<section id="home">
+  <div class="hero">
+    <p class="eyebrow">WELCOME TO THE SQUAD</p>
+    <h1>IAM<span>VIPER</span></h1>
+    <p>Gaming clips, edits, and a community built different. Pick your lane and enter the Viper zone.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://youtube.com/@iamviperlolxd">▶ Open YouTube ↗</a>
+      <button class="btn" data-open="gaming">Explore videos ↓</button>
+    </div>
+  </div>
+
+  <div class="heading">
+    <small>CHOOSE YOUR SECTION</small>
+    <h2>Enter the Viper zone.</h2>
+    <p>Fresh clips. Clean edits. The community.</p>
+  </div>
+
+  <div class="menu">
+    <button data-open="gaming">
+      <span class="symbol">⌘</span>
+      <strong>Gaming</strong>
+      <small>7 gameplay Shorts</small>
+    </button>
+    <button data-open="edits">
+      <span class="symbol">✦</span>
+      <strong>Edits</strong>
+      <small>2 edits from the channel</small>
+    </button>
+    <button data-open="squad">
+      <span class="symbol">☣</span>
+      <strong>The Viper Squad</strong>
+      <small>Community posts and updates</small>
+    </button>
+  </div>
+</section>
+
+<section id="gaming" class="gallery">
+  <div class="gallery-top">
+    <div><h2>⌘ Gaming</h2><p>Gameplay moments from the channel.</p></div>
+    <button class="btn" data-back>← Back home</button>
+  </div>
+  <div class="video-grid" id="gaming-grid"></div>
+</section>
+
+<section id="edits" class="gallery">
+  <div class="gallery-top">
+    <div><h2>✦ Edits</h2><p>Short edits from IamViper.</p></div>
+    <button class="btn" data-back>← Back home</button>
+  </div>
+  <div class="video-grid" id="edits-grid"></div>
+</section>
+
+<section id="squad" class="gallery">
+  <div class="gallery-top">
+    <div><h2>☣ The Viper Squad</h2><p>Community posts, directly from YouTube.</p></div>
+    <button class="btn" data-back>← Back home</button>
+  </div>
+  <div class="post-grid" id="posts-grid"></div>
+</section>
+</main>
+
+<footer>
+  <span>© <span id="year"></span> <strong>IAMVIPER</strong></span>
+  <span>Stay sharp. Stay venomous. ☣</span>
+</footer>
+
+<script>
+const gamingVideos = [
+  ["iCDQdQyK7jE", "Gaming Short 2"],
+  ["3VJZ23ChIUs", "Gaming Short 3"],
+  ["9PIzTfMF9Io", "Gaming Short 4"],
+  ["lZ2XuDWmpFA", "Gaming Short 6"],
+  ["urmmvZ8p-uE", "Gaming Short 7"],
+  ["dw-_r8D6x0Q", "Gaming Short 8"],
+  ["idAoiEhp3Gc", "Gaming Short 9"]
+];
+
+const editVideos = [
+  ["wiQKghLDaHY", "Edit 1"],
+  ["_gDdqN9GWLI", "Edit 5"]
+];
+
+const communityPosts = [
+  ["Ugkx5eqEpVYyNtmJErWkSZytQPwCW5P9HTcC", "Community Post 1"],
+  ["UgkxtsIaJ-pwSk0o8tXF6rQxWMM_pVu__VF2", "Community Post 2"],
+  ["UgkxIrI7gfLS38A0dzljkZhP14fL2yUw0un0", "Community Post 3"]
+];
+
+function addVideos(containerId, videos) {
+  const container = document.getElementById(containerId);
+
+  videos.forEach(([id, title]) => {
+    const link = document.createElement("a");
+    link.className = "video";
+    link.href = "https://youtube.com/shorts/" + id;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    const thumb = document.createElement("div");
+    thumb.className = "thumb";
+
+    const img = document.createElement("img");
+    img.src = "https://img.youtube.com/vi/" + id + "/hqdefault.jpg";
+    img.alt = title + " thumbnail";
+    img.loading = "lazy";
+    img.onerror = function() {
+      this.style.display = "none";
+      thumb.style.background = "linear-gradient(135deg,#203521,#080b09)";
+    };
+
+    const play = document.createElement("span");
+    play.className = "play";
+    play.textContent = "▶";
+
+    const info = document.createElement("div");
+    info.className = "video-info";
+
+    const name = document.createElement("strong");
+    name.textContent = title;
+
+    const type = document.createElement("small");
+    type.textContent = "YOUTUBE SHORT ↗";
+
+    thumb.append(img, play);
+    info.append(name, type);
+    link.append(thumb, info);
+    container.appendChild(link);
+  });
+}
+
+function addPosts() {
+  const container = document.getElementById("posts-grid");
+
+  communityPosts.forEach(([id, title]) => {
+    const link = document.createElement("a");
+    link.className = "post";
+    link.href = "https://youtube.com/post/" + id;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    const icon = document.createElement("span");
+    icon.className = "post-icon";
+    icon.textContent = "☣";
+
+    const name = document.createElement("strong");
+    name.textContent = title;
+
+    const action = document.createElement("small");
+    action.textContent = "View community post ↗";
+
+    link.append(icon, name, action);
+    container.appendChild(link);
+  });
+}
+
+function showSection(id) {
+  document.getElementById("home").style.display = "none";
+  document.querySelectorAll(".gallery").forEach(section => {
+    section.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showHome() {
+  document.getElementById("home").style.display = "";
+  document.querySelectorAll(".gallery").forEach(section => {
+    section.classList.remove("active");
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll("[data-open]").forEach(button => {
+  button.addEventListener("click", () => showSection(button.dataset.open));
+});
+
+document.querySelectorAll("[data-back]").forEach(button => {
+  button.addEventListener("click", showHome);
+});
+
+addVideos("gaming-grid", gamingVideos);
+addVideos("edits-grid", editVideos);
+addPosts();
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
+
